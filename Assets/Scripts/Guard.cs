@@ -8,11 +8,13 @@ public class Guard : MonoBehaviour {
     public static bool caughtPlayer;
 
     private NavMeshAgent agent;
-    public Text speechBubble;
+    
 
     private GameObject playerObject;
-    public Vector3 jailTarget;
-    private float waitBeforePatrolResumes;
+    public Transform jailTarget;
+    public float waitBeforePatrolResumes;
+
+    public int guardState;
 
 
 	// Use this for initialization
@@ -23,55 +25,141 @@ public class Guard : MonoBehaviour {
         agent = gameObject.GetComponent<NavMeshAgent>();
         
 
-        playerObject = GameObject.FindGameObjectWithTag("PlayerGroup");
+        playerObject = GameObject.FindGameObjectWithTag("Player");
 
         caughtPlayer = false;
+
+        guardState = 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+        switch (guardState)
+        {
+            //Patrolling state
+            case 1:
+                Patrolling();
+                break;
 
-        if(waitBeforePatrolResumes > 0)
+            //Patrolling while the alarm is going off-state
+            case 2:
+                PatrollingWhileAlarm();
+                break;
+
+            //Chasing the Player
+            case 3:
+                ChasingPlayer();
+                break;
+
+            //Moving to target area 
+            case 4:
+                MovingToTargetArea();
+                break;
+
+            //Searching target area
+            case 5:
+                SearchingTheArea();
+                break;
+
+            //Default state
+            default:
+                break;
+        }
+
+        
+
+        if (waitBeforePatrolResumes > 0)
         {
             waitBeforePatrolResumes = waitBeforePatrolResumes - Time.deltaTime;
 
         }
 
-        if(waitBeforePatrolResumes < 1)
+        //if(waitBeforePatrolResumes < 1)
+        //{
+        //    agent.Resume();
+        //}
+
+        if (waitBeforePatrolResumes < 1 && waitBeforePatrolResumes > 0 && caughtPlayer == true)
         {
-            agent.Resume();
+            SendPlayerToJail();
+            
+            agent.speed = 3.5f;
+            gameObject.GetComponent<GuardPatrol>().GotoNextPoint();
+            caughtPlayer = false;                       
         }
 
-        
-	
-	}
+    }
 
     void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "Player" && PlayerController.playerCaught == false)
         {
             agent.Stop();
-            PlayerController.playerCaught = true;
-            speechBubble.text = AILines.caughtLines[Random.Range(0, AILines.caughtLines.Length)];
-            print("You've been caught!");
-            SendPlayerToJail();
+            agent.ResetPath();
+            
             caughtPlayer = true;
-            if(waitBeforePatrolResumes > 0 && waitBeforePatrolResumes < 1)
-            {
-                
-                agent.Resume();
-                print("Resuming after having caught Player!");
-            }
+            PlayerController.playerCaught = true;
+
+            gameObject.GetComponent<AILines>().speech.text = gameObject.GetComponent<AILines>().caughtLines[Random.Range(0,gameObject.GetComponent<AILines>().caughtLines.Length)];
+
+            //FieldofView Variables:
+            gameObject.GetComponent<FieldOfView>().isChasing = false;
+            FieldOfView.isSpotting = false;
+
+            waitBeforePatrolResumes = 3.75f;
+
+            //gameObject.GetComponent<AILines>().speech.text = "";
+            
+            //SendPlayerToJail();
+            
+
+            
+
+            
 
         }
     }
 
     void SendPlayerToJail()
     {
-        playerObject.transform.position = jailTarget;
-        waitBeforePatrolResumes = 3.75f;
+        playerObject.transform.position = jailTarget.transform.position;
+        //waitBeforePatrolResumes = 3.75f;
+
+        //agent.ResetPath();
+        //gameObject.GetComponent<GuardPatrol>().GotoNextPoint();
+        
+        caughtPlayer = false;
 
     }
     
+
+    void Patrolling()
+    {
+        print("State change patrolling");
+    }
+
+
+    void PatrollingWhileAlarm()
+    {
+        print("State Change Patrolling with Alarm");
+    }
+
+
+    void ChasingPlayer()
+    {
+        print("I'm chasing now!");
+    }
+
+    
+    void MovingToTargetArea()
+    {
+
+    }
+
+
+    void SearchingTheArea()
+    {
+
+    }
 }

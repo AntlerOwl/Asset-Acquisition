@@ -62,17 +62,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Prototype 3.CSharp.Plugins.csproj">
-      <Project>{426A6FAB-72D9-A555-3121-11649340D261}</Project>
-      <Name>Prototype 3.CSharp.Plugins</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Assets\ObjectRotate.cs" />
+    <Compile Include="Assets\AlarmLights.cs" />
+    <Compile Include="Assets\AlarmPanel.cs" />
+    <Compile Include="Assets\CameraViewZone.cs" />
+    <Compile Include="Assets\LowPolyLaser.cs" />
+    <Compile Include="Assets\LowPolyLaserGun.cs" />
+    <Compile Include="Assets\Scripts\Alarm\Alarm.cs" />
     <Compile Include="Assets\Scripts\CameraBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Environment Scripts\ControlsReturning.cs" />
     <Compile Include="Assets\Scripts\Environment Scripts\DoorOpen.cs" />
     <Compile Include="Assets\Scripts\Environment Scripts\HideRoof.cs" />
     <Compile Include="Assets\Scripts\Environment Scripts\LightSwitch.cs" />
+    <Compile Include="Assets\Scripts\Game Control.cs" />
     <Compile Include="Assets\Scripts\Guard AI\AILines.cs" />
     <Compile Include="Assets\Scripts\Guard AI\FieldOfView.cs" />
     <Compile Include="Assets\Scripts\Guard AI\GuardPatrol.cs" />
@@ -82,28 +83,25 @@
     <Compile Include="Assets\Scripts\GunController.cs" />
     <Compile Include="Assets\Scripts\ItemSpawn.cs" />
     <Compile Include="Assets\Scripts\LookAtCamera.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
-    <Compile Include="Assets\Scripts\PlayerCanvas.cs" />
-    <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\LookAtTarget.cs" />
+    <Compile Include="Assets\Scripts\ObjectRotate.cs" />
+    <Compile Include="Assets\Scripts\Pickups\ScoreObject.cs" />
+    <Compile Include="Assets\Scripts\Player\NoiseTrigger.cs" />
+    <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerCanvas.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Scripts\ScoreManager.cs" />
-    <Compile Include="Assets\Scripts\ScoreObject.cs" />
+    <Compile Include="Assets\XRay Demo Assets\Scripts\Spinner.cs" />
+    <Compile Include="Assets\XRay Demo Assets\Scripts\XRayReplacement.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Rotorz\Reorderable List Field\Editor\Editor.ReorderableList.xml" />
     <None Include="Assets\Rotorz\Reorderable List Field\LICENSE.txt" />
     <None Include="Assets\Rotorz\Reorderable List Field\README.txt" />
-    <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
-    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
-    <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
-    <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
-    <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
-    <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
-    <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
+    <None Include="Assets\XRay Demo Assets\Shaders\Normal-Diffuse-Stencil-Write.shader" />
+    <None Include="Assets\XRay Demo Assets\Shaders\Normal-Diffuse-XRay-Replaceable.shader" />
+    <None Include="Assets\XRay Demo Assets\Shaders\XRay-ColoredOutline.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>

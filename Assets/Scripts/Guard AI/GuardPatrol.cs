@@ -8,6 +8,7 @@ public class GuardPatrol : MonoBehaviour {
     private NavMeshAgent agent;
     private float nodeStopTime;
     public GameObject currentNode;
+    private Transform nodeLookPoint;
 
 
 	// Use this for initialization
@@ -26,9 +27,8 @@ public class GuardPatrol : MonoBehaviour {
 	void Update () {
         //Choose the next destination point when the agent gets close to the current destination
 
-       
 
-        if (agent.remainingDistance < 0.5f)
+        if (agent.remainingDistance < 0.125f)
         {
 
             
@@ -36,13 +36,18 @@ public class GuardPatrol : MonoBehaviour {
 
             //var patrolObject = currentNode.GetComponent<PatrolNodes>();
                    
+            if(nodeLookPoint != null)
+            {
+                gameObject.transform.LookAt(nodeLookPoint);
+            }
 
             if (nodeStopTime > 0)
             {
-                agent.Stop();
+                agent.ResetPath();               
+                
                 nodeStopTime = nodeStopTime - Time.deltaTime;
             }
-            else
+            if (nodeStopTime <= 0)
             {
                 agent.Resume();
                 GotoNextPoint();
@@ -50,11 +55,7 @@ public class GuardPatrol : MonoBehaviour {
                         
         }
 
-        if (Guard.caughtPlayer == true)
-        {
-            GotoNextPoint();
-            Guard.caughtPlayer = false;
-        }
+
 
 
 	
@@ -74,9 +75,10 @@ public class GuardPatrol : MonoBehaviour {
         destpoint = (destpoint + 1) % points.Length;
 
         //Get the current node
-        currentNode = points[destpoint - 1];
+        currentNode = points[destpoint -1];
 
         nodeStopTime = currentNode.GetComponent<PatrolNodes>().waitTime;
+        nodeLookPoint = currentNode.GetComponent<PatrolNodes>().lookPoint;
 
 
         

@@ -4,11 +4,15 @@ using UnityEngine.UI;
 
 public class AILines : MonoBehaviour {
 
-    public string[] lvl1GuardLines = new string[5];
-    public static string[] spottedLines = new string[5];
-    public static string[] caughtLines = new string[7];
+    public string[] lvl1GuardLines = new string[9];
+    public string[] spottedLines = new string[4];
+    public string[] caughtLines = new string[6];
     public Vector2 secondsBetweenTalkingMinMax;
+
     float nextTalkTime;
+    float nextChaseTalkTime;
+    
+
     public Text speech;
     private float textTimer;
 
@@ -20,6 +24,11 @@ public class AILines : MonoBehaviour {
         lvl1GuardLines[2] = "Come out Fisher, wherever you are!";
         lvl1GuardLines[3] = "Turtles all the way down!";
         lvl1GuardLines[4] = "Never doubt it.";
+        lvl1GuardLines[5] = "Looking forward to supper";
+        lvl1GuardLines[6] = "No one is getting past me.";
+        lvl1GuardLines[7] = "Don't forget to change this voice line!";
+        lvl1GuardLines[8] = "I miss my wife.";
+        lvl1GuardLines[9] = "Gotta remember to pick up my lottery winnings";
 
         spottedLines[0] = "I see you!";
         spottedLines[1] = "Hey, stop right there!";
@@ -37,13 +46,15 @@ public class AILines : MonoBehaviour {
 
 
         nextTalkTime = Random.Range(secondsBetweenTalkingMinMax.x, secondsBetweenTalkingMinMax.y);
+        nextChaseTalkTime = 4.0F;
+       
 
     }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (Time.time > nextTalkTime && FieldOfView.isSpotting != true)
+        if (Time.time > nextTalkTime)
         {
             float secondsBetweenTalk = Random.Range(secondsBetweenTalkingMinMax.x, secondsBetweenTalkingMinMax.y);
             nextTalkTime = Time.time + secondsBetweenTalk;
@@ -64,6 +75,19 @@ public class AILines : MonoBehaviour {
             
                
         }
+
+        if(gameObject.GetComponent<FieldOfView>().isChasing == true && Time.time > nextChaseTalkTime)
+        {
+            
+            nextChaseTalkTime = Time.time + nextChaseTalkTime;
+
+            speech.text = spottedLines[Random.Range(0, spottedLines.Length)];
+
+        }
+
+       
+
+
 
         if (textTimer > 0)
         {

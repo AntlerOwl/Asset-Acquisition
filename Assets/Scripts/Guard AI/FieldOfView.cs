@@ -9,7 +9,7 @@ public class FieldOfView : MonoBehaviour {
     [Range(0, 360)]
     public float viewAngle;
 
-    public Text guardText;
+    //public Text guardText;
     public static bool isSpotting;
     public bool isChasing;
 
@@ -77,12 +77,14 @@ public class FieldOfView : MonoBehaviour {
                     //Anything you want happen while the player is spotted goes here
                     visibleTargets.Add(target);
 
+                    gameObject.GetComponent<Guard>().guardState = 3;
+                    
                     isSpotting = true;
                     isChasing = true;
                     pathfinder.SetDestination(target.position);
 
                     distanceToTarget = Vector3.Distance(transform.position, target.position);
-                    stopChaseTimer = 6.0f;
+                    stopChaseTimer = 4.5f;
 
                 }
             }
@@ -100,6 +102,7 @@ public class FieldOfView : MonoBehaviour {
     {
         //Set NavAgent values on chasing
 
+        
       
 
         if (isChasing == true && distanceToTarget < 9)
@@ -130,7 +133,7 @@ public class FieldOfView : MonoBehaviour {
         if(Guard.caughtPlayer == true)
         {
             isChasing = false;
-            isSpotting = false;
+            isSpotting = false;            
             pathfinder.speed = 3.0f;
         }
     }

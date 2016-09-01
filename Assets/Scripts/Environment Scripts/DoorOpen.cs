@@ -25,19 +25,41 @@ public class DoorOpen : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        if(Input.GetButtonDown("e") && doorOpen == false && Time.time > doorOpenTime)
+        if(Input.GetButtonDown("e") && doorOpen == false && Time.time > doorOpenTime && other.gameObject.tag == "Player")
         {
             doorOpenTime = Time.time + timeBetweenDoorInteract / 1000;
             doorObject.GetComponent<Animation>().Play("DoorSlideLeft");
-            doorOpen = !doorOpen;
+            doorOpen = true;
         }
         if (Input.GetKeyDown("e") && doorOpen == true && Time.time > doorOpenTime)
         {
             doorOpenTime = Time.time + timeBetweenDoorInteract / 1000;
             doorObject.GetComponent<Animation>().Play("DoorSlideLeftClose");
-            doorOpen = !doorOpen;
+            doorOpen = false;
+        }
+
+        
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Guard" )
+        {
+            doorObject.GetComponent<Animation>().Play("DoorSlideLeft");
+            doorOpen = true;
         }
     }
+
+    void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Guard" && doorOpen == true)
+        {
+            doorObject.GetComponent<Animation>().Play("DoorSlideLeftClose");
+            doorOpen = false;
+        }
+    }
+
+
 
 
 }

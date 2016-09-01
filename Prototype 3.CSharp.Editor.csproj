@@ -92,10 +92,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Prototype 3.CSharp.Plugins.csproj">
-      <Project>{426A6FAB-72D9-A555-3121-11649340D261}</Project>
-      <Name>Prototype 3.CSharp.Plugins</Name>
-    </ProjectReference>
     <ProjectReference Include="Prototype 3.CSharp.csproj">
       <Project>{770B24E5-5941-EACE-0AF5-5FBDF3401F67}</Project>
       <Name>Prototype 3.CSharp</Name>
@@ -123,17 +119,9 @@
     <None Include="Assets\Rotorz\Reorderable List Field\Editor\Editor.ReorderableList.xml" />
     <None Include="Assets\Rotorz\Reorderable List Field\LICENSE.txt" />
     <None Include="Assets\Rotorz\Reorderable List Field\README.txt" />
-    <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
-    <None Include="Assets\Standard Assets\CrossPlatformInput\CrossPlatformInputGuidelines.txt" />
-    <None Include="Assets\Standard Assets\Fonts\OpenSans\License!.txt" />
-    <None Include="Assets\Standard Assets\ParticleSystems\ParticleSystemsGuidelines.txt" />
-    <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAdd.shader" />
-    <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAddSoft.shader" />
-    <None Include="Assets\Standard Assets\ParticleSystems\Shaders\PriorityParticleAlpha.shader" />
-    <None Include="Assets\Standard Assets\Prototyping\Shaders\WorldCoordDiffuse.shader" />
+    <None Include="Assets\XRay Demo Assets\Shaders\Normal-Diffuse-Stencil-Write.shader" />
+    <None Include="Assets\XRay Demo Assets\Shaders\Normal-Diffuse-XRay-Replaceable.shader" />
+    <None Include="Assets\XRay Demo Assets\Shaders\XRay-ColoredOutline.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
