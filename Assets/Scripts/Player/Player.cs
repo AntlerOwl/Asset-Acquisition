@@ -2,8 +2,10 @@
 using System.Collections;
 
 [RequireComponent(typeof(PlayerController))]
-[RequireComponent(typeof(GunController))]
+[RequireComponent(typeof(EquippedToolController))]
 public class Player : MonoBehaviour {
+
+    public static bool busyInteracting;
 
     public float currentSpeed;
     public float moveSpeed;
@@ -13,15 +15,16 @@ public class Player : MonoBehaviour {
     public LayerMask mask = -1;
 
     public GameObject noiseSphere;
-    private Vector3 noiseSphereSize;
+    public Vector3 noiseSphereSize;
     private Vector3 targetScale;
     private IEnumerator scaleCoroutine;
+    
 
     private Rigidbody rigidB;
 
     PlayerController controller;
     Camera viewCamera;
-    GunController gunController;
+    EquippedToolController toolController;
 
     
     
@@ -30,12 +33,14 @@ public class Player : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         viewCamera = Camera.main;
-        gunController = GetComponent<GunController>();
+        toolController = GetComponent<EquippedToolController>();
         controller = GetComponent<PlayerController>();
         noiseSphereSize = noiseSphere.transform.localScale;
         playerMoving = false;
-              
-	}
+        
+
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -116,15 +121,33 @@ public class Player : MonoBehaviour {
 
     
         //weapon input
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && busyInteracting != true)
             {
-                gunController.Shoot();
+                toolController.Shoot();
+            }
+
+        if(Input.GetButton("1") && busyInteracting != true && toolController.currentlyEquippedWeaponNumber != 1)
+            {
+                toolController.currentlyEquippedWeaponNumber = 1;
+                toolController.EquipGun(toolController.startingGun);
+            }
+
+            if (Input.GetButton("2") && busyInteracting != true && toolController.currentlyEquippedWeaponNumber != 2)
+            {
+                toolController.EquipGun(toolController.noiseMaker);
+                toolController.currentlyEquippedWeaponNumber = 2;
+
             }
 
         }
         
         
 	}
+
+    public void TestingFunction()
+    {
+        print("The testing function worked!");
+    }
 
     //Coroutine that scales the size of the NoiseSphere
     public IEnumerator scaleNoiseRing(float duration)

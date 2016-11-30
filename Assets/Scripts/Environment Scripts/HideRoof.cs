@@ -17,7 +17,7 @@ public class HideRoof : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.gameObject.tag == "Player")
         {
             toHide.SetActive(false);
         }
@@ -26,7 +26,7 @@ public class HideRoof : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             toHide.SetActive(true);
         }

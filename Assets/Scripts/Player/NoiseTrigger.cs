@@ -52,11 +52,27 @@ public class NoiseTrigger : MonoBehaviour {
 
     void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Guard" && player.GetComponent<Player>().playerMoving == true)
+        if (other.gameObject.tag == "Guard" && player.GetComponent<Player>().playerMoving == true && other.gameObject.GetComponent<Guard>().guardState != 3)
         {
-            other.gameObject.GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
+            other.gameObject.GetComponent<Guard>().guardState = 7;
+            other.gameObject.GetComponent<Guard>().soundSourceNode.transform.position = player.transform.position;
+
+
+            if(other.gameObject.GetComponent<Guard>().currentlySearchingSound == true)
+            {
+                other.gameObject.GetComponent<Guard>().soundSourceNode.transform.position = player.transform.position;
+                other.gameObject.GetComponent<Guard>().currentlySearchingSound = false;
+                other.gameObject.GetComponent<Guard>().soundTargetSet = true;
+                other.gameObject.GetComponent<Guard>().hasWaitedBeforeMovingToSoundSource = false;             
+                other.gameObject.GetComponent<NavMeshAgent>().Resume();
+                other.gameObject.GetComponent<Guard>().waitingAfterHavingHeardSound = 0.0f;
+                other.gameObject.GetComponent<Guard>().currentlySearchingSound = false;
+            }
+
         }
+
     }
+    
 
     public IEnumerator FadeOut(float duration)
     {

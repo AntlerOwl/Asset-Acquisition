@@ -90,6 +90,9 @@
     <Reference Include="Editor.ReorderableList">
       <HintPath>Assets\Rotorz\Reorderable List Field\Editor\Editor.ReorderableList.dll</HintPath>
     </Reference>
+    <Reference Include="SabreCSG.Core">
+      <HintPath>Assets\SabreCSG\Scripts\SabreCSG.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Prototype 3.CSharp.csproj">
@@ -114,11 +117,29 @@
     <Compile Include="Assets\RainbowFolders\Editor\Settings\RainbowFoldersExtensionMethods.cs" />
     <Compile Include="Assets\RainbowFolders\Editor\Settings\RainbowFoldersSettings.cs" />
     <Compile Include="Assets\RainbowFolders\Editor\Settings\RainbowFoldersSettingsEditor.cs" />
+    <Compile Include="Assets\SabreCSG\Scripts\Editor\ExpandPropertiesDrawer.cs" />
+    <Compile Include="Assets\SabreCSG\Scripts\Editor\Inspectors\CSGBuildContextInspector.cs" />
+    <Compile Include="Assets\SabreCSG\Scripts\Editor\Inspectors\CSGModelInspector.cs" />
+    <Compile Include="Assets\SabreCSG\Scripts\Editor\Inspectors\KeyMappingsInspector.cs" />
+    <Compile Include="Assets\SabreCSG\Scripts\Editor\Inspectors\PrimitiveBrushInspector.cs" />
+    <Compile Include="Assets\SabreCSG\Scripts\Editor\Utilities\UtilityShortcuts.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Rotorz\Reorderable List Field\Editor\Editor.ReorderableList.xml" />
     <None Include="Assets\Rotorz\Reorderable List Field\LICENSE.txt" />
     <None Include="Assets\Rotorz\Reorderable List Field\README.txt" />
+    <None Include="Assets\SabreCSG\Changelog.txt" />
+    <None Include="Assets\SabreCSG\Internal\Shaders\BrushPreview.shader" />
+    <None Include="Assets\SabreCSG\Shaders\Diffuse-VertexColored.shader" />
+    <None Include="Assets\SabreCSG\Shaders\Handle.shader" />
+    <None Include="Assets\SabreCSG\Shaders\Line.shader" />
+    <None Include="Assets\SabreCSG\Shaders\LineDashed.shader" />
+    <None Include="Assets\SabreCSG\Shaders\Plane.shader" />
+    <None Include="Assets\SabreCSG\Shaders\Preview.shader" />
+    <None Include="Assets\SabreCSG\Shaders\SeeExcluded.shader" />
+    <None Include="Assets\SabreCSG\Shaders\Tri-Planar.shader" />
+    <None Include="Assets\SabreCSG\Shaders\UINoAlpha.shader" />
+    <None Include="Assets\SabreCSG\Shaders\VertexTinted.shader" />
     <None Include="Assets\XRay Demo Assets\Shaders\Normal-Diffuse-Stencil-Write.shader" />
     <None Include="Assets\XRay Demo Assets\Shaders\Normal-Diffuse-XRay-Replaceable.shader" />
     <None Include="Assets\XRay Demo Assets\Shaders\XRay-ColoredOutline.shader" />

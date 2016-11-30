@@ -4,15 +4,21 @@ using System.Collections;
 
 public class ScoreObject : MonoBehaviour {
 
-    public int score;
+    public int value;
     public float thrust;
     public float spinSpeed;
+    public string objectType;
+
+    public Vector3 endSize;
+
     private int activated;
     
     private Vector3 sackPosition;
     private GameObject sack;
     private Rigidbody rb;
-    
+
+
+    public GameObject gC;
 
 
 	// Use this for initialization
@@ -21,18 +27,14 @@ public class ScoreObject : MonoBehaviour {
         sack = GameObject.Find("sackPosition");
         
         activated = 0;
-        score = 1;
         rb = gameObject.GetComponent<Rigidbody>();
+        gC = GameObject.Find("Game Control");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-
         sackPosition = sack.transform.position;
-
-
-
 
     }
 
@@ -57,7 +59,7 @@ public class ScoreObject : MonoBehaviour {
 
         var originalPosition = gameObject.transform.position;
         var originalScale = gameObject.transform.localScale;
-        var targetScale = new Vector3(0.65f, 0.65f, 0.65f);
+        var targetScale = endSize;
         float progress = duration;
 
         
@@ -69,10 +71,20 @@ public class ScoreObject : MonoBehaviour {
             transform.Rotate(Vector3.left * spinSpeed * Time.deltaTime);
             transform.localScale = Vector3.Lerp(targetScale, originalScale, progress);
 
-
             yield return null;
         }
         ScoreManager.currentScore++;
+
+        if(objectType == "GoldGoblet")
+        {
+            gC.GetComponent<PlayerInventory>().goldenGoblet++;
+        }
+        if(objectType == "GoldenPlate")
+        {
+            gC.GetComponent<PlayerInventory>().goldenPlate++;
+        }
+        
+        gC.GetComponent<PlayerInventory>().cashTotal += value;
         Destroy(gameObject);
         yield return null;
     }

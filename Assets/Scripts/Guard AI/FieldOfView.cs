@@ -72,16 +72,12 @@ public class FieldOfView : MonoBehaviour {
                 float dstToTarget = Vector3.Distance(transform.position, target.position);
 
                 //the guard has spotted the player
-                if (!Physics.Raycast(transform.position,dirToTarget,dstToTarget,obstacleMask))
+                if (!Physics.Raycast(transform.position,dirToTarget,dstToTarget,obstacleMask) && gameObject.GetComponent<Guard>().guardState != 2)
                 {
                     //Anything you want happen while the player is spotted goes here
                     visibleTargets.Add(target);
-
+                    gameObject.GetComponent<NavMeshAgent>().Resume();
                     gameObject.GetComponent<Guard>().guardState = 3;
-                    
-                    isSpotting = true;
-                    isChasing = true;
-                    pathfinder.SetDestination(target.position);
 
                     distanceToTarget = Vector3.Distance(transform.position, target.position);
                     stopChaseTimer = 4.5f;
@@ -98,44 +94,13 @@ public class FieldOfView : MonoBehaviour {
 	
 	}
 
+    
     void Update()
     {
         //Set NavAgent values on chasing
-
         
-      
 
-        if (isChasing == true && distanceToTarget < 9)
-        {
-            pathfinder.SetDestination(target.position);
-            pathfinder.speed = 7.0f;
-            
-        }
 
-        if(isChasing == true && distanceToTarget > 9)
-        {
-
-        }
-
-        if (stopChaseTimer > 1.0f)
-        {
-            stopChaseTimer = stopChaseTimer - Time.deltaTime;
-        }
-
-        if (stopChaseTimer < 1 && isChasing == true)
-        {
-            isChasing = false;
-            isSpotting = false;
-            pathfinder.speed = 3.0f;
-
-        }
-
-        if(Guard.caughtPlayer == true)
-        {
-            isChasing = false;
-            isSpotting = false;            
-            pathfinder.speed = 3.0f;
-        }
     }
 
     void DrawFieldofView()

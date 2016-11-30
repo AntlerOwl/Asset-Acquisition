@@ -4,9 +4,9 @@ using UnityEngine.UI;
 
 public class AILines : MonoBehaviour {
 
-    public string[] lvl1GuardLines = new string[9];
-    public string[] spottedLines = new string[4];
-    public string[] caughtLines = new string[6];
+    public string[] lvl1GuardLines = new string[10];
+    public string[] spottedLines = new string[5];
+    public string[] caughtLines = new string[7];
     public Vector2 secondsBetweenTalkingMinMax;
 
     float nextTalkTime;

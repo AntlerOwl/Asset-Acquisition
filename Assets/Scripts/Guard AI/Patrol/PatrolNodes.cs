@@ -4,7 +4,9 @@ using System.Collections;
 public class PatrolNodes : MonoBehaviour {
 
     public float waitTime;
+    public string lookPointType;
     public Transform lookPoint;
+    public Transform lookPoint2;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +18,14 @@ public class PatrolNodes : MonoBehaviour {
 	void Update () {
 
 
-	
-	}
+
+
+    }
+
+    void rotateToLookPoint()
+    {
+
+        print("Rotating!");
+    }
+    
 }
