@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class LowPolyLaser : MonoBehaviour
 {
@@ -133,7 +134,7 @@ public class LowPolyLaser : MonoBehaviour
 
             //Set Path
             GameControl.guardList[i].GetComponent<NavMeshAgent>().SetPath(path);
-            GameControl.guardList[i].GetComponent<NavMeshAgent>().Stop();
+            GameControl.guardList[i].GetComponent<NavMeshAgent>().isStopped = true;
 
             //Remaining Distance to the Path set
             distancesToGuards[i] = GameControl.guardList[i].GetComponent<NavMeshAgent>().remainingDistance;
@@ -158,7 +159,7 @@ public class LowPolyLaser : MonoBehaviour
             GameControl.guardList[indexOfGuardNearestPoint].GetComponent<Guard>().guardState = 4;
             GameControl.guardList[indexOfGuardNearestPoint].GetComponent<Guard>().alarmCalledBy = guardCallTargetPoint;
 
-            GameControl.guardList[i].GetComponent<NavMeshAgent>().Resume();
+            GameControl.guardList[i].GetComponent<NavMeshAgent>().isStopped = false;
 
 
 

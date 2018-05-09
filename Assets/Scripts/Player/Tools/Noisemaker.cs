@@ -7,14 +7,16 @@ public class Noisemaker : MonoBehaviour {
     public float thrust;
     public float spinSpeed;
 
+
     public GameObject panel;
+
+    public GameObject box;
 
     public Vector3 endSize;
 
-    public Camera mainCam;
-
     private int activated;
     private int interactingWith;
+    private bool playerInTrigger;
 
     private Vector3 sackPosition;
     private GameObject sack;
@@ -25,10 +27,16 @@ public class Noisemaker : MonoBehaviour {
     void Start () {
 
         sack = GameObject.Find("sackPosition");
+        box = this.gameObject.transform.GetChild(0).gameObject;
 
         activated = 0;
         rb = gameObject.GetComponent<Rigidbody>();
         gc = GameObject.Find("Game Control");
+        panel.SetActive(false);
+        interactingWith = 0;
+
+        playerInTrigger = false;
+
 
     }
 	
@@ -37,10 +45,24 @@ public class Noisemaker : MonoBehaviour {
 
         sackPosition = sack.transform.position;
 
-        if(mainCam != null)
+        if(playerInTrigger == true && Input.GetButtonDown("e"))
         {
-            panel.transform.LookAt(mainCam.transform.position);
+            if(panel.activeInHierarchy == false) 
+            {
+                panel.SetActive(true);
+                Player.busyInteracting = true;
+
+            }
+
+            else
+            {
+                panel.SetActive(false);
+                Player.busyInteracting = false;
+            }
+
+
         }
+
 
     }
 
@@ -51,32 +73,36 @@ public class Noisemaker : MonoBehaviour {
         {
             activated = 1;
 
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            box.GetComponent<BoxCollider>().enabled = false;
             panel.SetActive(false);
+            Player.busyInteracting = false;
             StartCoroutine(MoveObjectToSack(1.25f));
 
         }
 
-        if(other.gameObject.tag == "Player" && Input.GetButton("e") && activated == 0 && interactingWith == 0)
-        {
-            interactingWith = 1;
-            panel.SetActive(true);
-        }
+        
+        
 
     }
 
-    void onTriggerExit(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player" && interactingWith == 1)
+        if (other.gameObject.tag == "Player" && activated == 0) 
         {
-            interactingWith = 0;
-            panel.SetActive(false);
-            print("Went outta the thing!");
+            playerInTrigger = true;
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player" && activated == 0)
+        {
+            playerInTrigger = false;
         }
 
         if(other.gameObject.tag == "Player")
         {
             panel.SetActive(false);
+            Player.busyInteracting = false;
         }
     }
 

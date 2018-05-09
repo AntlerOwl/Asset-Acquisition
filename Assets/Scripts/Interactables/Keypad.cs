@@ -58,11 +58,14 @@ public class Keypad : MonoBehaviour {
             {
                 panelUI.SetActive(true);
                 Player.busyInteracting = true;
+                print("Test 1");
+
             }
             else
             {
                 panelUI.SetActive(false);
                 Player.busyInteracting = false;
+                print("test2");
             }
                           
         }

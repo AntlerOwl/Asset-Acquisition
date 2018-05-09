@@ -17,7 +17,7 @@ public class CameraBehaviour : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 
         
         var target = cameraTarget.transform.position + offset;
